@@ -23,7 +23,5 @@ Install instructions for Ubuntu Bionic.
 
   
         source /opt/ros/foxy/setup.bash
-        mkdir -p ~/ieee_ws
-        mkdir -p ~/ieee_ws/src
-        cd ieee_ws/src/
-        git clone https://github.com/6enyamin/ieee_ros2.git -b foxy-devel
+        cd ~
+        git clone https://github.com/6enyamin/ieee_ws.git 
