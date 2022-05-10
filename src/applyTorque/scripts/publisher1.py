@@ -49,7 +49,7 @@ class Torque_publisher(Node):
     
         force_message = Wrench()
         if torq_type == 'constant':
-            self.torque=-50.
+            self.torque=-self.goal_torque
 
         elif torq_type == 'ramp':
             if self.torque > self.goal_torque:

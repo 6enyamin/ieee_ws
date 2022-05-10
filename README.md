@@ -15,7 +15,7 @@
 Install instructions for Ubuntu Bionic.
 
 1. Install at least one simulator,
-   [Gazebo Classic](http://gazebosim.org/tutorials?cat=install) or
+   [Gazebo Classic](https://classic.gazebosim.org/tutorials?tut=install_ubuntu&cat=install#Alternativeinstallation:step-by-step) or
    [Ignition Gazebo](https://ignitionrobotics.org/docs/citadel/install)
 
 1. Install the appropriate ROS 2 version as instructed
@@ -25,3 +25,14 @@ Install instructions for Ubuntu Bionic.
         source /opt/ros/foxy/setup.bash
         cd ~
         git clone https://github.com/6enyamin/ieee_ws.git 
+
+
+## Run
+
+        cd ~/ieee_ws/src/applyTorque/worlds/
+        gazebo -u world1.world
+
+open new terminal:
+
+        cd ~/ieee_ws/src/applyTorque/scripts/
+        python3 publisher1.py  
