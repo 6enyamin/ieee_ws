@@ -1,0 +1,110 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='model1'>
+    <pose>0 0 0 -1.57 0 0</pose>
+
+
+
+    <link name='base_link'>
+      <inertial>
+        <pose>0 -0.1593 0 0 -0 0</pose>
+        <mass>455.92</mass>
+        <inertia>
+          <ixx>33.905</ixx>
+          <ixy>3.8115e-33</ixy>
+          <ixz>-2.5391e-34</ixz>
+          <iyy>53.054</iyy>
+          <iyz>-1.1725e-15</iyz>
+          <izz>33.905</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model1/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model1/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='R1' type='revolute'>
+      <pose relative_to='base_link'>0 -1.7 0 1.5708 -0 -3.14159</pose>
+      <parent>base_link</parent>
+      <child>link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='link'>
+      <pose relative_to='R1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0 0.5 0 -0 0</pose>
+        <mass>21.206</mass>
+        <inertia>
+          <ixx>1.7804</ixx>
+          <ixy>-3.6279e-33</ixy>
+          <ixz>-1.0255e-17</ixz>
+          <iyy>1.7804</iyy>
+          <iyz>1.223e-32</iyz>
+          <izz>0.026507</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model1/meshes/link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://model1/meshes/link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <plugin name="gazebo_ros_force" filename="libgazebo_ros_force.so">
+      <ros>
+        <namespace>/demo/link</namespace>
+        <remapping>gazebo_ros_force:=force_demo</remapping>
+      </ros>
+      <link_name>link</link_name>
+      <force_frame>link</force_frame>
+    </plugin>
+
+
+    <plugin name='joint_publisher' filename='libgazebo_ros_joint_state_publisher.so'>
+      <ros>
+        <namespace>/myrobot</namespace>
+      </ros>
+      <update_rate>1000.0</update_rate>
+      <joint_name>R1</joint_name>
+    </plugin>
+
+
+  </model>
+</sdf>
