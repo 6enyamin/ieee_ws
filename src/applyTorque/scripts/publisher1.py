@@ -9,8 +9,9 @@ import pandas as pd
 from os.path import expanduser
 from pathlib import Path
 from math import sin,pi
+import sys
 
-torq_type = ['constant','ramp','harmonic'][0]
+torq_type = ['constant','ramp','harmonic'][int(sys.argv[1])]
 name = f'model1-{torq_type}-{str(random.random())}'
 home = expanduser('~')
 DIR = f"{home}/pprs_ws/csv/"
@@ -27,7 +28,7 @@ class Torque_publisher(Node):
         self.trajectory_publihser = self.create_publisher(Wrench,publish_topic, 10)
         self.joint_state_subscriber = self.create_subscription(JointState , "/myrobot/joint_states" , self.joint_state_pub , 10)
         self.torque = 0.0
-        self.goal_torque = 50.0
+        self.goal_torque = float(sys.argv[2])
         self.c = -1
 
         self.t = 0

@@ -10,7 +10,9 @@ from pathlib import Path
 from math import sin,pi
 import pandas as pd
 
-torq_type = ['constant','ramp','harmonic'][1]
+import sys
+
+torq_type = ['constant','ramp','harmonic'][int(sys.argv[1])]
 name = f'model3-{torq_type}-{str(random.random())}'
 home = expanduser('~')
 DIR = f"{home}/pprs_ws/csv/"
@@ -35,7 +37,7 @@ class Trajectory_publisher(Node):
         self.joint_state_subscriber = self.create_subscription(JointState , "/myrobot/R21/joint_states" , self.joint_state_pub2 , 10)
         self.joint_state_subscriber = self.create_subscription(JointState , "/myrobot/R31/joint_states" , self.joint_state_pub3 , 10)
         self.torque = 0.0
-        self.goal_torque =-50.0
+        self.goal_torque =float(sys.argv[2])
         self.c = -1
         self.t=0
         
@@ -62,7 +64,7 @@ class Trajectory_publisher(Node):
         force_message3 = Wrench()
         
         if torq_type == 'constant':
-            self.torque=-50.
+            self.torque=-self.goal_torque 
 
         elif torq_type == 'ramp':
             if self.torque > self.goal_torque:
