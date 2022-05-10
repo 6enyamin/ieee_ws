@@ -58,26 +58,8 @@ class Torque_publisher(Node):
 
     #Define timer callback function
     def timer_callback(self):
-    	
-    	#Define a message of Wrench Type
         force_message = Wrench()
         self.counter = self.counter+1 
-        #apply torque
-        #if self.torque > self.goal_torque:
-            #self.torque-=0.001
-            #self.torque=-self.goal_torque
-            #self.torque-=0.01
-            #force_message.torque.x = 50.01
-            #print(force_message.torque.x)
-            #self.trajectory_publihser.publish(force_message)  
-	#stablize goal torque
-        #elif self.torque < self.goal_torque or self.torque >= 0.0:
-            #print("in if ")
-            #self.torque+=0.01
-            #force_message.torque.x = self.torque
-            #print(force_message.torque.x)
-            #self.trajectory_publihser.publish(force_message)
-        #errore_ = self.last_pos - self.current_pos
         e_dot = (self.errore_ - self.errore_last  ) / 0.001
         self.e_integ = self.e_integ + (((self.errore_last + self.errore_ )/2)*0.001)
         
@@ -88,10 +70,6 @@ class Torque_publisher(Node):
         force_message.torque.x = f
         self.trajectory_publihser.publish(force_message)
         print(force_message.torque.x)
-
-
-
-
 
 
 def main(args=None):
