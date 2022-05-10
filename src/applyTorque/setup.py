@@ -3,6 +3,7 @@ import os
 from glob import glob
 
 package_name = 'applyTorque'
+model_names = next(os.walk('models/'))[1]
 
 setup(
     name=package_name,
