@@ -1,0 +1,4 @@
+source /opt/ros/foxy/setup.bash
+mkdir -p ~/ieee_ws
+mkdir -p ~/ieee_ws/src
+cd ieee_ws/src/
